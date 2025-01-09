@@ -13,8 +13,3 @@ export const artwork_test_page = `https://dev.dagit.club/ko/agit/e5d3f76a-69f5-4
 
 export const screenshot_path = (spec, scenario, name) =>
   path.join(__dirname, `../screenshots/${spec}-spec/${scenario}/${name}.png`);
-
-export const agit_test_page = await page.goto(base_url);
-await page
-  .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-  .click();
