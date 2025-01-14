@@ -10,7 +10,7 @@ import {
 import path from "path";
 import { text } from "stream/consumers";
 
-test.describe("Main", () => {
+test.describe("Main page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
     await page.waitForTimeout(latency);
@@ -20,28 +20,39 @@ test.describe("Main", () => {
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
-        "Main",
+        "Main-page",
         "Main-banner-scroll-ckeck",
         "1-go-to-main-page"
       ),
       fullPage: true,
     });
+    const before = await page.locator(
+      'xpath=//*[@id="main"]/div[1]/div[5]/div[1]/div[1]/div/div[1]/div[1]/div/img'
+    );
     await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/div[1]/div/div[1]/div[3]')
-
+      .locator(
+        ".absolute.right-2.top-1\\/2.-translate-y-1\\/2.p-2.hidden.lg\\:block"
+      )
       .click();
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
-        "Main",
+        "Main-page",
         "Main-banner-scroll-ckeck",
         "2-move-to-forward-banner"
       ),
     });
+    const after = await page.locator(
+      'xpath=//*[@id="main"]/div[1]/div[5]/div[1]/div[1]/div/div[1]/div[1]/div/img'
+    );
     await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/div[1]/div/div[1]/div[1]')
+      .locator(
+        ".absolute.left-2.top-1\\/2.-translate-y-1\\/2.p-2.hidden.lg\\:block"
+      )
       .click();
     await page.waitForTimeout(latency);
+    expect(before).not.toBe(after);
+    console.log("img changed successfully");
     await page.screenshot({
       path: screenshot_path(
         "Main-page",
@@ -51,9 +62,7 @@ test.describe("Main", () => {
     });
   });
 
-  //In to the create page, background is should be blurred
   test("[Main-page-002] Screen blur check", async ({ page }) => {
-    await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
         "Main-page",
@@ -62,7 +71,17 @@ test.describe("Main", () => {
       ),
       fullPage: true,
     });
+    const targetElement = page
+      .locator("div.fixed.top-0.left-0.w-full.h-full")
+      .first();
+    const initialClass = await targetElement.getAttribute("class");
+    expect(initialClass).toContain("hidden");
     await page.getByText("Create").click();
+    await page.waitForTimeout(latency);
+    const updatedClass = await targetElement.getAttribute("class");
+    expect(updatedClass).not.toContain("hidden");
+    expect(updatedClass).toContain("flex");
+    console.log("Screen blur check");
     await page.screenshot({
       path: screenshot_path(
         "Main-page",

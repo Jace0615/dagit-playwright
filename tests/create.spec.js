@@ -16,7 +16,7 @@ test.describe.serial("Create", () => {
     await page.waitForTimeout(latency);
   });
 
-  test("[Create-001] collection-can-not-be-created-without-agit-select", async ({
+  test("[Create-001] create-collection-without-agit-select", async ({
     page,
   }) => {
     await page.getByText("Create", { exact: true }).click();
@@ -25,27 +25,19 @@ test.describe.serial("Create", () => {
     await page.screenshot({
       path: screenshot_path(
         "Create",
-        "collection-can-not-be-created-without-agit-select",
+        "create-collection-without-agit-select",
         "1-go-to-create-collection-page"
       ),
       fullPage: true,
     });
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[2]/div/div/div[2]/input'
-      )
-      .fill(collection_name);
+    await page.getByPlaceholder("콜렉션 이름 입력").fill(collection_name);
     await page.waitForTimeout(latency);
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[2]/div/div/div[3]/div[2]/textarea'
-      )
-      .fill("Test");
+    await page.getByPlaceholder("콜렉션 설명 입력").fill("test");
     await page.waitForTimeout(latency);
     let fileChooserPromise = page.waitForEvent("filechooser");
     await page
       .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[1]/div/label/div/div/div/label/div'
+        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[1]/div/label/div/div'
       )
       .click();
     await page.waitForTimeout(latency);
@@ -54,7 +46,7 @@ test.describe.serial("Create", () => {
     fileChooserPromise = page.waitForEvent("filechooser");
     await page
       .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[2]/div/label/div/div/div/label/div'
+        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[2]/div/label/div/div'
       )
       .click();
     await page.waitForTimeout(latency);
@@ -64,7 +56,7 @@ test.describe.serial("Create", () => {
     await page.screenshot({
       path: screenshot_path(
         "Create",
-        "collection-can-not-be-created-without-agit-select",
+        "create-collection-without-agit-select",
         "2-fill-the-information-without-agit-select"
       ),
       fullPage: true,
@@ -73,46 +65,39 @@ test.describe.serial("Create", () => {
     await page.waitForTimeout(latency);
     const element = page.getByRole("button", { name: "Create" });
     await expect(element).toBeVisible();
+    console.log("Collection not created");
     await page.screenshot({
       path: screenshot_path(
         "Create",
-        "collection-can-not-be-created-without-agit-select",
+        "create-collection-without-agit-select",
         "3-check-the-collection-does-not-made"
       ),
       fullPage: true,
     });
   });
 
-  test("[Create-002] Artwork-can-not-be-minted-without-collection-select", async ({
+  test("[Create-002] create-artwork-without-collection-select", async ({
     page,
   }) => {
     await page.getByText("Create", { exact: true }).click();
     await page.waitForTimeout(latency);
     await page.getByText("Mint your artwork", { exact: true }).click();
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[2]/div/div/div[2]/input'
-      )
-      .fill(collection_name);
+    await page.getByPlaceholder("NFT 이름 입력").fill(nft_name);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
         "Create",
-        "Artwork-can-not-be-minted-without-collection-select",
+        "create-artwork-without-collection-select",
         "1-go-to-mint-your-artwork-page"
       ),
       fullPage: true,
     });
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[2]/div/div/div[4]/div[2]/textarea'
-      )
-      .fill("Test");
+    await page.getByPlaceholder("NFT 설명 입력").fill("test");
     await page.waitForTimeout(latency);
     let fileChooserPromise = page.waitForEvent("filechooser");
     await page
       .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div/div/label/div/div/div'
+        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div/div/label/div/div'
       )
       .click();
     await page.waitForTimeout(latency);
@@ -122,7 +107,7 @@ test.describe.serial("Create", () => {
     await page.screenshot({
       path: screenshot_path(
         "Create",
-        "Artwork-can-not-be-minted-without-collection-select",
+        "create-artwork-without-collection-select",
         "2-fill-the-information-without-collection-select"
       ),
       fullPage: true,
@@ -131,10 +116,11 @@ test.describe.serial("Create", () => {
     await page.waitForTimeout(latency);
     const element = page.getByRole("button", { name: "Create" });
     await expect(element).toBeVisible();
+    console.log("Artwork not created");
     await page.screenshot({
       path: screenshot_path(
         "Create",
-        "Artwork-can-not-be-minted-without-collection-select",
+        "create-artwork-without-collection-select",
         "3-check-the-artwork-does-not-made"
       ),
       fullPage: true,
