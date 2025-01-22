@@ -6,6 +6,7 @@ import {
   collection_name,
   nft_name,
   screenshot_path,
+  my_profile,
 } from "./constants";
 import path from "path";
 
@@ -246,7 +247,7 @@ test.describe("Search", () => {
       .locator('xpath=//*[@id="main"]/div[1]/div[2]/div/div/div[1]/div[1]')
       .click();
     await page.waitForTimeout(latency);
-    await page.getByText("Test Agit - 1730878927").first().click();
+    await page.getByText("incheon universe agit").first().click();
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(

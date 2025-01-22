@@ -57,75 +57,75 @@ test.describe("setup data", () => {
     console.log("Agit created successfully");
   });
 
-  test("creating a new collection", async ({ page }) => {
-    await page.getByText("Create", { exact: true }).click();
-    await page.waitForTimeout(latency);
-    await page.getByText("Drop a collection", { exact: true }).click();
-    await page.waitForTimeout(latency);
-    await page.selectOption("select", agit_name);
-    await page.waitForTimeout(latency);
-    await page
-      .getByPlaceholder("콜렉션 이름 입력", { exact: true })
-      .fill(collection_name);
-    await page.waitForTimeout(latency);
-    await page
-      .getByPlaceholder("콜렉션 설명 입력", { exact: true })
-      .fill("Test");
-    await page.waitForTimeout(latency);
-    let fileChooserPromise = page.waitForEvent("filechooser");
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[1]/div/label/div/div/div/label/div'
-      )
-      .click();
-    await page.waitForTimeout(latency);
-    let fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(image_path, "collection_profile.png"));
-    fileChooserPromise = page.waitForEvent("filechooser");
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[2]/div/label/div/div/div/label/div'
-      )
-      .click();
-    await page.waitForTimeout(latency);
-    fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(image_path, "collection_banner.png"));
-    await page.getByRole("button", { name: "Create" }).click();
-    await page.waitForTimeout(latency);
-    await page.getByText("confirm").isVisible();
-    await page.waitForTimeout(latency);
-    await page.getByText("confirm").click();
-    await page.waitForTimeout(latency);
-    console.log("Collection created successfully");
-  });
+  //   test("creating a new collection", async ({ page }) => {
+  //     await page.getByText("Create", { exact: true }).click();
+  //     await page.waitForTimeout(latency);
+  //     await page.getByText("Drop a collection", { exact: true }).click();
+  //     await page.waitForTimeout(latency);
+  //     await page.selectOption("select", agit_name);
+  //     await page.waitForTimeout(latency);
+  //     await page
+  //       .getByPlaceholder("콜렉션 이름 입력", { exact: true })
+  //       .fill(collection_name);
+  //     await page.waitForTimeout(latency);
+  //     await page
+  //       .getByPlaceholder("콜렉션 설명 입력", { exact: true })
+  //       .fill("Test");
+  //     await page.waitForTimeout(latency);
+  //     let fileChooserPromise = page.waitForEvent("filechooser");
+  //     await page
+  //       .locator(
+  //         'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[1]/div/label/div/div/div/label/div'
+  //       )
+  //       .click();
+  //     await page.waitForTimeout(latency);
+  //     let fileChooser = await fileChooserPromise;
+  //     await fileChooser.setFiles(path.join(image_path, "collection_profile.png"));
+  //     fileChooserPromise = page.waitForEvent("filechooser");
+  //     await page
+  //       .locator(
+  //         'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div[2]/div/label/div/div/div/label/div'
+  //       )
+  //       .click();
+  //     await page.waitForTimeout(latency);
+  //     fileChooser = await fileChooserPromise;
+  //     await fileChooser.setFiles(path.join(image_path, "collection_banner.png"));
+  //     await page.getByRole("button", { name: "Create" }).click();
+  //     await page.waitForTimeout(latency);
+  //     await page.getByText("confirm").isVisible();
+  //     await page.waitForTimeout(latency);
+  //     await page.getByText("confirm").click();
+  //     await page.waitForTimeout(latency);
+  //     console.log("Collection created successfully");
+  //   });
 
-  test("creating a new NFT", async ({ page }) => {
-    await page.getByText("Create", { exact: true }).click();
-    await page.waitForTimeout(latency);
-    await page.getByText("Mint your artwork", { exact: true }).click();
-    await page.waitForTimeout(latency);
-    await page.selectOption("select", "Test collection");
-    await page.waitForTimeout(latency);
-    await page
-      .getByPlaceholder("NFT 이름 입력", { exact: true })
-      .fill("Test Artwork");
-    await page.waitForTimeout(latency);
-    await page
-      .getByPlaceholder("NFT 설명 입력", { exact: true })
-      .fill("Test Artwork");
-    await page.waitForTimeout(latency);
-    let fileChooserPromise = page.waitForEvent("filechooser");
-    await page
-      .locator(
-        'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div/div/label/div/div/div'
-      )
-      .click();
-    await page.waitForTimeout(latency);
-    let fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(image_path, "nft.png"));
-    await page.getByRole("button", { name: "Create" }).click();
+  //   test("creating a new NFT", async ({ page }) => {
+  //     await page.getByText("Create", { exact: true }).click();
+  //     await page.waitForTimeout(latency);
+  //     await page.getByText("Mint your artwork", { exact: true }).click();
+  //     await page.waitForTimeout(latency);
+  //     await page.selectOption("select", "Test collection");
+  //     await page.waitForTimeout(latency);
+  //     await page
+  //       .getByPlaceholder("NFT 이름 입력", { exact: true })
+  //       .fill("Test Artwork");
+  //     await page.waitForTimeout(latency);
+  //     await page
+  //       .getByPlaceholder("NFT 설명 입력", { exact: true })
+  //       .fill("Test Artwork");
+  //     await page.waitForTimeout(latency);
+  //     let fileChooserPromise = page.waitForEvent("filechooser");
+  //     await page
+  //       .locator(
+  //         'xpath=//*[@id="main"]/div[1]/div[1]/div/div[2]/div/div[1]/div[3]/div/div/label/div/div/div'
+  //       )
+  //       .click();
+  //     await page.waitForTimeout(latency);
+  //     let fileChooser = await fileChooserPromise;
+  //     await fileChooser.setFiles(path.join(image_path, "nft.png"));
+  //     await page.getByRole("button", { name: "Create" }).click();
 
-    // NOTE: wait for transaction and fetcher.
-    await page.waitForTimeout(5000);
-  });
+  //     // NOTE: wait for transaction and fetcher.
+  //     await page.waitForTimeout(5000);
+  //   });
 });

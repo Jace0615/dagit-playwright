@@ -99,6 +99,20 @@ module.exports = defineConfig({
       timeout: 30000,
       use: {
         headless: process.env.HEADLESS !== "false",
+        storageState: {
+          cookies: [],
+          origins: [
+            {
+              origin: process.env.BASE_URL || "",
+              localStorage: [
+                {
+                  name: "identity",
+                  value: `"${process.env.IDENTITY}"` || "",
+                },
+              ],
+            },
+          ],
+        },
         defaultBrowserType: "chromium",
         viewport: {
           width: 1920,

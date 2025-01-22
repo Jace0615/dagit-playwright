@@ -6,6 +6,7 @@ import {
   collection_name,
   nft_name,
   screenshot_path,
+  my_profile,
 } from "./constants";
 import path from "path";
 
@@ -16,9 +17,7 @@ test.describe("My profile", () => {
   });
 
   test("[My profile-001] Edit a profile", async ({ page }) => {
-    await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-      .click();
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
@@ -75,9 +74,7 @@ test.describe("My profile", () => {
   });
 
   test("[My profile-002] Check a Creative credit", async ({ page }) => {
-    await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-      .click();
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
@@ -92,9 +89,7 @@ test.describe("My profile", () => {
   test("[My profile-003] Check a creative credit earnings", async ({
     page,
   }) => {
-    await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-      .click();
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
@@ -133,9 +128,7 @@ test.describe("My profile", () => {
   test("[My profile-004] Check a creative credit activity", async ({
     page,
   }) => {
-    await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-      .click();
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
@@ -172,9 +165,7 @@ test.describe("My profile", () => {
   });
 
   test("[My profile-005] Created nft list view", async ({ page }) => {
-    await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-      .click();
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
@@ -187,9 +178,7 @@ test.describe("My profile", () => {
   });
 
   test("[My profile-006] Created agit list view", async ({ page }) => {
-    await page
-      .locator('xpath=//*[@id="main"]/div[1]/div[5]/header/div/div[2]/div')
-      .click();
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
@@ -211,7 +200,7 @@ test.describe("My profile", () => {
     });
   });
   test("[My profile-007] Check if CC matches actual data", async ({ page }) => {
-    await page.goto("https://dev.dagit.club/ko/user/profile");
+    await page.goto(my_profile);
     await page.waitForTimeout(latency);
     await page.screenshot({
       path: screenshot_path(
